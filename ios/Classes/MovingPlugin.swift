@@ -12,6 +12,8 @@ public class MovingPlugin: NSObject, FlutterPlugin {
     switch call.method {
     case "getPlatformVersion":
       result("iOS " + UIDevice.current.systemVersion)
+    case "getCurrentDistance":
+      result(FlutterMethodNotImplemented)
     default:
       result(FlutterMethodNotImplemented)
     }

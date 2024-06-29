@@ -23,4 +23,17 @@ class RunnerTests: XCTestCase {
     waitForExpectations(timeout: 1)
   }
 
+  func testGetCurrentDistance() {
+    let plugin = MovingPlugin()
+
+    let call = FlutterMethodCall(methodName: "getCurrentDistance", arguments: [])
+
+    let resultExpectation = expectation(description: "result block must be called.")
+    plugin.handle(call) { result in
+      XCTAssertEqual(result as! Int, 0)
+      resultExpectation.fulfill()
+    }
+    waitForExpectations(timeout: 1)
+  }
+
 }
