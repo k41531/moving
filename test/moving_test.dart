@@ -10,6 +10,9 @@ class MockMovingPlatform
 
   @override
   Future<String?> getPlatformVersion() => Future.value('42');
+
+  @override
+  Future<bool?> subscribeRecording() => Future.value(true);
 }
 
 void main() {
@@ -25,5 +28,13 @@ void main() {
     MovingPlatform.instance = fakePlatform;
 
     expect(await movingPlugin.getPlatformVersion(), '42');
+  });
+
+  test('subscribeRecording', () async {
+    Moving movingPlugin = Moving();
+    MockMovingPlatform fakePlatform = MockMovingPlatform();
+    MovingPlatform.instance = fakePlatform;
+
+    expect(await movingPlugin.subscribeRecording(), true);
   });
 }

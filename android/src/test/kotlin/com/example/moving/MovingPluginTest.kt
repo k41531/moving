@@ -24,4 +24,15 @@ internal class MovingPluginTest {
 
     Mockito.verify(mockResult).success("Android " + android.os.Build.VERSION.RELEASE)
   }
+
+  @Test
+  fun onMethodCall_subscribeRecording_returnsExpectedValue() {
+    val plugin = MovingPlugin()
+
+    val call = MethodCall("subscribeRecording", null)
+    val mockResult: MethodChannel.Result = Mockito.mock(MethodChannel.Result::class.java)
+    plugin.onMethodCall(call, mockResult)
+
+    Mockito.verify(mockResult).success(true)
+  }
 }
