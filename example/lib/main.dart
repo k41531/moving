@@ -18,6 +18,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
   bool _subscribeRecording = false;
+  int _todaySteps = 0;
   final _movingPlugin = Moving();
 
   @override
@@ -30,12 +31,14 @@ class _MyAppState extends State<MyApp> {
   Future<void> initPlatformState() async {
     String platformVersion;
     bool subscribeRecording = false;
+    int todaySteps = 0;
     // Platform messages may fail, so we use a try/catch PlatformException.
     // We also handle the message potentially returning null.
     try {
       platformVersion =
           await _movingPlugin.getPlatformVersion() ?? 'Unknown platform version';
       subscribeRecording = await _movingPlugin.subscribeRecording() ?? false;
+      todaySteps = await _movingPlugin.getTodaySteps() ?? -1;
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }
@@ -48,6 +51,7 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       _platformVersion = platformVersion;
       _subscribeRecording = subscribeRecording;
+      _todaySteps = todaySteps;
     });
   }
 
@@ -63,6 +67,16 @@ class _MyAppState extends State<MyApp> {
             children: [
               Text('Running on: $_platformVersion\n'),
               Text('Recording: $_subscribeRecording\n'),
+              Text('Today Steps: $_todaySteps\n'),
+              ButtonBar(
+                alignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                    onPressed: initPlatformState,
+                    child: const Text('Refresh'),
+                  ),
+                ],
+              ),
             ],
           ),
           

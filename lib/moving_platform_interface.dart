@@ -30,4 +30,8 @@ abstract class MovingPlatform extends PlatformInterface {
   Future<bool?> subscribeRecording() {
     throw UnimplementedError('subscribeRecording() has not been implemented.');
   }
+
+  Future<int?> getTodaySteps() {
+    throw UnimplementedError('getTodaySteps() has not been implemented.');
+  }
 }

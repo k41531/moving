@@ -9,4 +9,8 @@ class Moving {
   Future<bool?> subscribeRecording() {
     return MovingPlatform.instance.subscribeRecording();
   }
+
+  Future<int?> getTodaySteps() {
+    return MovingPlatform.instance.getTodaySteps();
+  }
 }

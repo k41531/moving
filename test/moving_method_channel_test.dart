@@ -17,6 +17,8 @@ void main() {
             return '42';
           case 'subscribeRecording':
             return true;
+          case 'getTodaySteps':
+            return 1000;
           default:
             return null;
         }
@@ -34,5 +36,9 @@ void main() {
 
   test('subscribeRecording', () async {
     expect(await platform.subscribeRecording(), true);
+  });
+
+  test('getTodaySteps', () async {
+    expect(await platform.getTodaySteps(), 1000);
   });
 }

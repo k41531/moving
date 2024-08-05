@@ -13,6 +13,9 @@ class MockMovingPlatform
 
   @override
   Future<bool?> subscribeRecording() => Future.value(true);
+
+  @override
+  Future<int?> getTodaySteps() => Future.value(1000);
 }
 
 void main() {
@@ -36,5 +39,13 @@ void main() {
     MovingPlatform.instance = fakePlatform;
 
     expect(await movingPlugin.subscribeRecording(), true);
+  });
+
+  test('getTodaySteps', () async {
+    Moving movingPlugin = Moving();
+    MockMovingPlatform fakePlatform = MockMovingPlatform();
+    MovingPlatform.instance = fakePlatform;
+
+    expect(await movingPlugin.getTodaySteps(), 1000);
   });
 }
