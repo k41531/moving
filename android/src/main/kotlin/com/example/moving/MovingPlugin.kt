@@ -99,24 +99,22 @@ class MovingPlugin : FlutterPlugin, MethodCallHandler {
                 .build()
 
         val localRecordingClient = FitnessLocal.getLocalRecordingClient(context)
-        var steps = 0
 
         localRecordingClient.readData(readRequest).addOnSuccessListener { response ->
-            // The aggregate query puts datasets into buckets, so flatten into a
-            // single list of datasets.
+            var steps = 0
             for (dataSet in response.buckets.flatMap { it.dataSets }) {
                 dumpDataSet(dataSet)
                 steps += getSteps(dataSet)
             }
+            result.success(steps)
+        }.addOnFailureListener { e ->
+            Log.w(TAG, "There was an error reading data", e)
+            result.error("READ_ERROR", "Failed to read data", e.message)
         }
-            .addOnFailureListener { e ->
-                Log.w(TAG, "There was an error reading data", e)
-            }
-        result.success(steps)
 
     }
 
-    fun dumpDataSet(dataSet: LocalDataSet) {
+    private fun dumpDataSet(dataSet: LocalDataSet) {
         Log.i(TAG, "Data returned for Data type: ${dataSet.dataType.name}")
         for (dp in dataSet.dataPoints) {
             Log.i(TAG, "Data point:")
@@ -132,7 +130,7 @@ class MovingPlugin : FlutterPlugin, MethodCallHandler {
         }
     }
 
-    fun getSteps(dataSet: LocalDataSet): Int {
+    private fun getSteps(dataSet: LocalDataSet): Int {
         var steps = 0
         for (dp in dataSet.dataPoints) {
             for (field in dp.dataType.fields) {
