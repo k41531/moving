@@ -24,4 +24,5 @@ internal class MovingPluginTest {
 
     Mockito.verify(mockResult).success("Android " + android.os.Build.VERSION.RELEASE)
   }
+
 }

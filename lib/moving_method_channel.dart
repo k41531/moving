@@ -14,4 +14,16 @@ class MethodChannelMoving extends MovingPlatform {
     final version = await methodChannel.invokeMethod<String>('getPlatformVersion');
     return version;
   }
+
+  @override
+  Future<bool?> subscribeRecording() async {
+    final result = await methodChannel.invokeMethod<bool>('subscribeRecording');
+    return result;
+  }
+
+  @override
+  Future<int?> getTodaySteps() async {
+    final steps = await methodChannel.invokeMethod<int>('getTodaySteps');
+    return steps;
+  }
 }

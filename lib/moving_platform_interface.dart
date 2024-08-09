@@ -26,4 +26,12 @@ abstract class MovingPlatform extends PlatformInterface {
   Future<String?> getPlatformVersion() {
     throw UnimplementedError('platformVersion() has not been implemented.');
   }
+
+  Future<bool?> subscribeRecording() {
+    throw UnimplementedError('subscribeRecording() has not been implemented.');
+  }
+
+  Future<int?> getTodaySteps() {
+    throw UnimplementedError('getTodaySteps() has not been implemented.');
+  }
 }
