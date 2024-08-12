@@ -26,4 +26,10 @@ class MethodChannelMoving extends MovingPlatform {
     final steps = await methodChannel.invokeMethod<int>('getTodaySteps');
     return steps;
   }
+
+  @override
+  Future<double?> getTodayDistance() async {
+    final distance = await methodChannel.invokeMethod<double>('getTodayDistance');
+    return distance;
+  }
 }

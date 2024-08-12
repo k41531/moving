@@ -13,4 +13,8 @@ class Moving {
   Future<int?> getTodaySteps() {
     return MovingPlatform.instance.getTodaySteps();
   }
+
+  Future<double?> getTodayDistance() {
+    return MovingPlatform.instance.getTodayDistance();
+  }
 }

@@ -19,6 +19,8 @@ void main() {
             return true;
           case 'getTodaySteps':
             return 1000;
+          case 'getTodayDistance':
+            return 42.0;
           default:
             return null;
         }
@@ -40,5 +42,9 @@ void main() {
 
   test('getTodaySteps', () async {
     expect(await platform.getTodaySteps(), 1000);
+  });
+
+  test('getTodayDistance', () async {
+    expect(await platform.getTodayDistance(), 42.0);
   });
 }

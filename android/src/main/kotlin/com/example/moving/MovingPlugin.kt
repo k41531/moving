@@ -14,6 +14,7 @@ import io.flutter.plugin.common.MethodChannel.Result
 class MovingPlugin : FlutterPlugin, MethodCallHandler {
     private lateinit var channel: MethodChannel
     private lateinit var stepCounter: StepCounter
+    private lateinit var distanceMeter: DistanceMeter
 
     companion object {
         private const val TAG = "MovingPlugin"
@@ -23,6 +24,7 @@ class MovingPlugin : FlutterPlugin, MethodCallHandler {
         channel = MethodChannel(flutterPluginBinding.binaryMessenger, "moving")
         channel.setMethodCallHandler(this)
         stepCounter = StepCounter(flutterPluginBinding.applicationContext)
+        distanceMeter = DistanceMeter(flutterPluginBinding.applicationContext)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -45,6 +47,16 @@ class MovingPlugin : FlutterPlugin, MethodCallHandler {
                 stepCounter.getTodaySteps(
                     onSuccess = { steps ->
                         result.success(steps)
+                    },
+                    onError = { errorCode, errorMessage ->
+                        result.error(errorCode, errorMessage, null)
+                    }
+                )
+            }
+            "getTodayDistance" -> {
+                distanceMeter.getTodayDistance(
+                    onSuccess = { distance ->
+                        result.success(distance)
                     },
                     onError = { errorCode, errorMessage ->
                         result.error(errorCode, errorMessage, null)

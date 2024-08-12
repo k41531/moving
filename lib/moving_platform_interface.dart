@@ -34,4 +34,8 @@ abstract class MovingPlatform extends PlatformInterface {
   Future<int?> getTodaySteps() {
     throw UnimplementedError('getTodaySteps() has not been implemented.');
   }
+
+  Future<double?> getTodayDistance() {
+    throw UnimplementedError('getTodayDistance() has not been implemented.');
+  }
 }

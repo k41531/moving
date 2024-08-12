@@ -16,6 +16,9 @@ class MockMovingPlatform
 
   @override
   Future<int?> getTodaySteps() => Future.value(1000);
+
+  @override
+  Future<double?> getTodayDistance() => Future.value(42.0);
 }
 
 void main() {
@@ -47,5 +50,13 @@ void main() {
     MovingPlatform.instance = fakePlatform;
 
     expect(await movingPlugin.getTodaySteps(), 1000);
+  });
+
+  test('getTodayDistance', () async {
+    Moving movingPlugin = Moving();
+    MockMovingPlatform fakePlatform = MockMovingPlatform();
+    MovingPlatform.instance = fakePlatform;
+
+    expect(await movingPlugin.getTodayDistance(), 42.0);
   });
 }
