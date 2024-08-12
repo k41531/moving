@@ -25,6 +25,7 @@ class MovingPlugin : FlutterPlugin, MethodCallHandler {
         channel.setMethodCallHandler(this)
         stepCounter = StepCounter(flutterPluginBinding.applicationContext)
         distanceMeter = DistanceMeter(flutterPluginBinding.applicationContext)
+        distanceMeter.startLocationService()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
