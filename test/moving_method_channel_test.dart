@@ -21,6 +21,8 @@ void main() {
             return 1000;
           case 'getTodayDistance':
             return 42.0;
+          case 'getCurrentLocation':
+            return "37.4219983,-122.084";
           default:
             return null;
         }
@@ -46,5 +48,9 @@ void main() {
 
   test('getTodayDistance', () async {
     expect(await platform.getTodayDistance(), 42.0);
+  });
+
+  test('getCurrentLocation', () async {
+    expect(await platform.getCurrentLocation(), "37.4219983,-122.084");
   });
 }

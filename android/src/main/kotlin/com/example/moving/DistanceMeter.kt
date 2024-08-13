@@ -25,14 +25,20 @@ class DistanceMeter(private val context: Context) {
     fun startLocationService() {
         Log.d("moving", "TEST")
         val intent = Intent(context, LocationService::class.java)
-        context.stopService(intent)
+       context.stopService(intent)
 
 //        LocationUpdatesService.locationLiveData.observeForever(locationObserver)
 //        LocationUpdatesService.statusLiveData.observeForever(statusObserver)
 //
-        context.startService(intent)
+       context.startService(intent)
+
         Log.d("moving", "Start")
 
     }
 
+    fun getCurrentLocation(onSuccess: (String) -> Unit, onError: (String, String?) -> Unit) {
+        val latitude = 0.0
+        val longitude = 0.0
+        onSuccess("${latitude},${longitude}")
+    }
 }

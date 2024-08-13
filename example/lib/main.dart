@@ -19,6 +19,7 @@ class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
   bool _subscribeRecording = false;
   int _todaySteps = 0;
+  String _location = 'Unknown';
   final _movingPlugin = Moving();
 
   @override
@@ -32,6 +33,7 @@ class _MyAppState extends State<MyApp> {
     String platformVersion;
     bool subscribeRecording = false;
     int todaySteps = 0;
+    String location = '';
     // Platform messages may fail, so we use a try/catch PlatformException.
     // We also handle the message potentially returning null.
     try {
@@ -39,6 +41,7 @@ class _MyAppState extends State<MyApp> {
           await _movingPlugin.getPlatformVersion() ?? 'Unknown platform version';
       subscribeRecording = await _movingPlugin.subscribeRecording() ?? false;
       todaySteps = await _movingPlugin.getTodaySteps() ?? -1;
+      location = await _movingPlugin.getCurrentLocation() ?? 'Unknown location';
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }
@@ -52,6 +55,7 @@ class _MyAppState extends State<MyApp> {
       _platformVersion = platformVersion;
       _subscribeRecording = subscribeRecording;
       _todaySteps = todaySteps;
+      _location = location;
     });
   }
 
@@ -68,6 +72,7 @@ class _MyAppState extends State<MyApp> {
               Text('Running on: $_platformVersion\n'),
               Text('Recording: $_subscribeRecording\n'),
               Text('Today Steps: $_todaySteps\n'),
+              Text('Location: $_location\n'),
               ButtonBar(
                 alignment: MainAxisAlignment.center,
                 children: [

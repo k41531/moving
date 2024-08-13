@@ -64,6 +64,16 @@ class MovingPlugin : FlutterPlugin, MethodCallHandler {
                     }
                 )
             }
+            "getCurrentLocation" -> {
+                distanceMeter.getCurrentLocation(
+                    onSuccess = { location ->
+                        result.success(location)
+                    },
+                    onError = { errorCode, errorMessage ->
+                        result.error(errorCode, errorMessage, null)
+                    }
+                )
+            }
             else -> {
                 result.notImplemented()
             }

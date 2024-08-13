@@ -17,4 +17,8 @@ class Moving {
   Future<double?> getTodayDistance() {
     return MovingPlatform.instance.getTodayDistance();
   }
+
+  Future<String?> getCurrentLocation() {
+    return MovingPlatform.instance.getCurrentLocation();
+  }
 }

@@ -32,4 +32,10 @@ class MethodChannelMoving extends MovingPlatform {
     final distance = await methodChannel.invokeMethod<double>('getTodayDistance');
     return distance;
   }
+
+  @override
+  Future<String?> getCurrentLocation() async {
+    final location = await methodChannel.invokeMethod<String>('getCurrentLocation');
+    return location;
+  }
 }

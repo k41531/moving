@@ -19,6 +19,9 @@ class MockMovingPlatform
 
   @override
   Future<double?> getTodayDistance() => Future.value(42.0);
+
+  @override
+  Future<String?> getCurrentLocation() => Future.value("37.4219983,-122.084");
 }
 
 void main() {
@@ -58,5 +61,13 @@ void main() {
     MovingPlatform.instance = fakePlatform;
 
     expect(await movingPlugin.getTodayDistance(), 42.0);
+  });
+
+  test('getCurrentLocation', () async {
+    Moving movingPlugin = Moving();
+    MockMovingPlatform fakePlatform = MockMovingPlatform();
+    MovingPlatform.instance = fakePlatform;
+
+    expect(await movingPlugin.getCurrentLocation(), "37.4219983,-122.084");
   });
 }
